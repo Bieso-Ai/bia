@@ -156,7 +156,7 @@ const appData = {
         },
         {
             id: 'curiosity',
-            bg: 'assets/bg-curiosity.jpg',
+            bg: 'assets/ich_am_reden.png',
             content: `
                 <h2>Before you go...</h2>
                 <p>do you want to see something?</p>
@@ -168,7 +168,7 @@ const appData = {
         },
         {
             id: 'heart',
-            bg: 'assets/bg-curiosity.jpg',
+            bg: 'assets/ich_am_reden.png',
             content: `
                 <h2>Almost there</h2>
                 <p>Please touch my heart to see what's inside:</p>
@@ -243,12 +243,9 @@ function loadScene(sceneId) {
             bgLayer.style.backgroundImage = 'linear-gradient(135deg, #fbcfe8, #fbcfe8, #fdf2f8, #fce7f3)';
         };
 
-        // Reset the glass card styles in case they were removed by the 'hug' scene
-        contentCard.style.background = 'rgba(255, 255, 255, 0.05)';
-        contentCard.style.backdropFilter = 'blur(16px)';
-        contentCard.style.webkitBackdropFilter = 'blur(16px)';
-        contentCard.style.boxShadow = '0 16px 40px rgba(0,0,0,0.15)';
-        contentCard.style.border = '1px solid rgba(255, 255, 255, 0.2)';
+        // Reset the glass card underlay in case it was hidden by the 'hug' scene
+        const glassBg = document.getElementById('glass-bg');
+        if (glassBg) glassBg.style.display = 'block';
 
         // Only the comfort options should be at the top!
         const topScenes = ['comfort_1', 'option_1', 'option_3', 'option_3_part2', 'option_2_part1', 'option_2_part2', 'option_2_part3'];
@@ -331,12 +328,9 @@ function giveHug() {
         if (finalHugImage) {
             hugScene.bg = finalHugImage;
         
-        // Hide glass card for a full-screen image moment
-        contentCard.style.background = 'transparent';
-        contentCard.style.backdropFilter = 'none';
-        contentCard.style.webkitBackdropFilter = 'none';
-        contentCard.style.boxShadow = 'none';
-        contentCard.style.border = 'none';
+        // Hide glass underlay for a full-screen image moment
+        const glassBg = document.getElementById('glass-bg');
+        if (glassBg) glassBg.style.display = 'none';
 
         // Also set the background of the curiosity and heart scenes to this hug image
         const curiosityScene = appData.scenes.find(s => s.id === 'curiosity');
