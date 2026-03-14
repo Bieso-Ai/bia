@@ -323,17 +323,13 @@ function chooseLocation(imageName) {
 function giveHug() {
     const hugScene = appData.scenes.find(s => s.id === 'hug_given');
     if (hugScene) {
-        // e.g. "beach_hug.jpeg" or "mountain_hug.png"
-        // Note: mointain in folder is mointain.jpeg but mountain_hug.png ... let's handle that edge case just in case
-        let locMap = selectedLocation;
-        if (locMap === 'mointain') locMap = 'mountain';
+        let finalHugImage = '';
+        if (selectedLocation === 'beach') { finalHugImage = 'assets/beach_hug.jpeg'; }
+        else if (selectedLocation === 'field') { finalHugImage = 'assets/field_hug.jpeg'; }
+        else if (selectedLocation === 'mointain' || selectedLocation === 'mountain') { finalHugImage = 'assets/mountain_hug.png'; }
         
-        // Let's assume the _hug versions have the same extension as the original unless it's mountain
-        let ext = selectedLocationExt;
-        if (locMap === 'mountain') ext = '.png'; // Hardcoded fix for mountain_hug.png from LS output
-
-        const finalHugImage = 'assets/' + locMap + '_hug' + ext;
-        hugScene.bg = finalHugImage;
+        if (finalHugImage) {
+            hugScene.bg = finalHugImage;
         
         // Hide glass card for a full-screen image moment
         contentCard.style.background = 'transparent';
@@ -348,6 +344,7 @@ function giveHug() {
         
         const heartScene = appData.scenes.find(s => s.id === 'heart');
         if (heartScene) heartScene.bg = finalHugImage;
+        }
     }
     nextScene('hug_given');
 }
