@@ -180,7 +180,7 @@ const appData = {
         },
         {
             id: 'finale',
-            bg: 'assets/bg-finale.jpg',
+            bg: 'assets/ich_am_reden.png',
             content: `
                 <h2 style="font-size: 1.8rem; color: white; margin-bottom: 12px;">It's you</h2>
                 <img src="assets/xcv.jpg" class="finale-img" alt="You" onerror="this.style.display='none'">
